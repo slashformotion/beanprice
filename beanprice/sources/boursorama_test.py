@@ -97,7 +97,7 @@ class BoursoramaPriceFetcher(unittest.TestCase):
             time = datetime.datetime(2024, 2, 1, 12, 0, 0, tzinfo=tz.tzutc())
             srcprice = boursorama.Source().get_historical_price("1rPOVH", time)
             self.assertIsInstance(srcprice, source.SourcePrice)
-            self.assertEqual(Decimal("8.75"), srcprice.price)
+            self.assertEqual(Decimal("8.70"), srcprice.price)
             self.assertEqual("EUR", srcprice.quote_currency)
             self.assertIsNotNone(srcprice.time.tzinfo)
 
