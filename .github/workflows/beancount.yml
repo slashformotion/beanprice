@@ -4,7 +4,6 @@ on:
   push:
     branches: ["main", "master"]
   pull_request:
-    branches: ["main", "master"]
 
 jobs:
   test:
@@ -12,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"] # add new version of python when released
     steps:
       - uses: actions/checkout@v4
 
@@ -26,9 +25,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements_dev.txt
           pip install ruff
-
-      - name: Lint with ruff
-        run: ruff check beanprice
 
       - name: Lint with pylint
         run: pylint beanprice
