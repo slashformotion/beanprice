@@ -56,6 +56,7 @@ The following price sources are available:
 
 | Name                    | Module                    | Provides prices for                                                               | Base currency                                                                    | Latest price? | Historical price? |
 |-------------------------|---------------------------|-----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|---------------|-------------------|
+| Boursorama             | `beanprice.boursorama`  | [Stocks, ETFs](https://www.boursorama.com)                                        | EUR[^1]                                                                         | ✓             | ✓                 |
 | Alphavantage            | `beanprice.alphavantage`  | [Stocks, FX, Crypto](http://alphavantage.co)                                      | Many currencies                                                                  | ✓             | ✕                 |
 | Coinbase                | `beanprice.coinbase`      | [Most common (crypto)currencies](https://api.coinbase.com/v2/exchange-rates)      | [Many currencies](https://api.coinbase.com/v2/currencies)                        | ✓             | ✓                 |
 | Coincap                 | `beanprice.coincap`       | [Most common (crypto)currencies](https://docs.coincap.io)                         | USD                                                                              | ✓             | ✓                 |
@@ -75,6 +76,13 @@ More price sources can be found at [awesome-beancount.com](https://awesome-beanc
 ## Creating a custom price source
 
 To create a price source, create a package (i.e. `my_package`) with a module (i.e. `my_module`) that contains the Source class which inherits from the `beanprice.Source` class:
+
+[^1]: The Boursorama price source (`beanprice.boursorama`) only provides prices denominated in EUR. When using this source, you must specify "EUR" as the currency prefix, e.g.:
+    ```beancount
+    1900-01-01 commodity OVH
+      price: "EUR:boursorama/1rPOVH"
+    ```
+    Attempting to use this source with any other currency (e.g., "USD:boursorama/...") will not work as expected, since all prices returned by Boursorama are in EUR.
 
 ```python
 from beanprice import source
